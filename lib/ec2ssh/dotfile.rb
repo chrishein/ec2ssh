@@ -13,6 +13,7 @@ module Ec2ssh
           }
         },
         'regions' => %w(ap-northeast-1),
+        'append_region_to_host' => true
       }.merge(config)
     end
 

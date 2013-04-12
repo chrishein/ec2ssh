@@ -30,7 +30,8 @@ module Ec2ssh
           next nil if name_tag.nil? || name_tag[:value].nil?
           name = name_tag[:value]
           dns_name = instance[:dns_name] or next nil
-          {:host => "#{name}.#{region}", :dns_name => dns_name}
+          hostname = name << (@dotfile['append_region_to_host'] ? ".#{region}" : '')
+          {:host => "#{hostname}", :dns_name => dns_name}
         }.compact.sort {|a,b| a[:host] <=> b[:host] }
       end
 
