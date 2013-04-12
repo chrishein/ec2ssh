@@ -32,6 +32,7 @@ aws_keys:
     secret_access_key: YOUR_SECRET_ACCESS_KEY
 regions:
 - ap-northeast-1
+append_region_to_host: true
 ```
 
 ### 5. Execute `ec2ssh update`
@@ -121,6 +122,7 @@ aws_keys:
     secret_access_key: ...(Filled by ENV['AMAZON_SECRET_ACCESS_KEY'])
 regions:
 - ap-northeast-1
+append_region_to_host: true
 ```
 
 ## multiple aws keys
@@ -164,6 +166,19 @@ $ vi ~/.ec2ssh
 
 # Notice
 `ec2ssh` command updates your `.ssh/config` file default. You should make a backup of it.
+
+# Usage tips
+
+Use general host configurations in your `.ssh/config` file with wildcards that match your instances names.
+
+```
+Host db-*
+    User ubuntu
+    IdentityFile ~/.ssh/db__ec2_key
+    Compression yes
+```
+
+For instances with names db-01, db-02, etc., `ec2ssh` command will update your `.ssh/config` file adding entries with the HostName property.
 
 # License
 ec2ssh is released under the MIT license.
